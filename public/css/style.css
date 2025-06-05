@@ -78,7 +78,7 @@ body {
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
-    align-self: flex-start;
+    align-self: flex-start; /* Default: sejajar kiri di desktop */
 }
 
 .btn-about-me:hover {
@@ -155,22 +155,34 @@ body {
     padding: 40px 0;
 }
 
-.timeline::before {
+.timeline::before { /* Ini adalah garis dasar vertikal */
     content: '';
     position: absolute;
     left: 50%;
     top: 0;
-    bottom: 0;
+    bottom: 0; /* Tetap full height sebagai background */
     width: 4px;
-    background: linear-gradient(180deg, 
-        rgba(188, 7, 212, 0.2) 0%,
-        rgba(188, 7, 212, 0.8) 20%,
+    background: rgba(188, 7, 212, 0.2); /* Warna lebih terang untuk background */
+    transform: translateX(-50%);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.timeline-progress-fill { /* Garis yang akan mengisi/mengikuti scroll */
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 4px;
+    background: linear-gradient(180deg, /* Gradient lebih hidup untuk filling */
+        rgba(188, 7, 212, 0.8) 0%,
         rgba(188, 7, 212, 1) 50%,
-        rgba(84, 12, 120, 1) 80%,
-        rgba(84, 12, 120, 0.2) 100%
+        rgba(84, 12, 120, 1) 100%
     );
     transform: translateX(-50%);
     border-radius: 4px;
+    z-index: 2; /* Di atas garis dasar */
+    height: 0; /* Dimulai dari 0, dianimasikan oleh JS */
+    transition: height 0.5s ease-out; /* Transisi untuk animasi tinggi */
 }
 
 .timeline-item {
@@ -179,19 +191,10 @@ body {
     opacity: 0;
     transform: translateY(30px);
     animation: slideInUp 0.8s ease forwards;
+    z-index: 3; /* Item berada di atas garis */
 }
 
-.timeline-item:nth-child(1) { animation-delay: 0.1s; }
-.timeline-item:nth-child(2) { animation-delay: 0.3s; }
-.timeline-item:nth-child(3) { animation-delay: 0.5s; }
-.timeline-item:nth-child(4) { animation-delay: 0.7s; }
-
-@keyframes slideInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* ... (Existing timeline-item nth-child delays and keyframes) ... */
 
 .timeline-dot {
     position: absolute;
@@ -201,17 +204,37 @@ body {
     height: 18px;
     background: linear-gradient(135deg, #bc07d4 0%, #540c78 100%);
     border-radius: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(0.08); /* Awalnya kecil/tersembunyi */
+    opacity: 0; /* Awalnya transparan */
     border: 4px solid #ffffff;
     box-shadow: 0 0 0 4px rgba(188, 7, 212, 0.2);
-    z-index: 3;
-    transition: all 0.3s ease;
+    z-index: 4; /* Dot berada di atas semua garis */
+    transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.6s ease-out; /* Transisi bouncy */
 }
 
 .timeline-item:hover .timeline-dot {
+    /* Ini tetap untuk efek hover, bisa dihapus atau disesuaikan jika tidak dibutuhkan bersama animasi scroll */
     transform: translateX(-50%) scale(1.2);
 }
 
+/* Class untuk dot saat masuk viewport */
+.timeline-dot.is-in-view {
+    transform: translateX(-50%) scale(1); /* Kembali ke ukuran normal */
+    opacity: 1; /* Menjadi terlihat */
+}
+
+/* Animasi denyut opsional */
+.timeline-dot.pulsing {
+    animation: dotPulse 1.5s infinite alternate;
+}
+
+@keyframes dotPulse {
+    0% { box-shadow: 0 0 0 4px rgba(188, 7, 212, 0.2); }
+    50% { box-shadow: 0 0 0 10px rgba(188, 7, 212, 0.4); }
+    100% { box-shadow: 0 0 0 4px rgba(188, 7, 212, 0.2); }
+}
+
+/* Gaya untuk konten timeline box */
 .timeline-content {
     background: #ffffff;
     padding: 25px;
@@ -609,10 +632,6 @@ body.contact-page::before {
 .contact-container button[type="submit"]:hover {
     transform: translateY(-3px);
     box-shadow: 0 15px 35px rgba(188, 7, 212, 0.4);
-}
-
-.contact-container button[type="submit"]:hover::before {
-    left: 100%;
 }
 
 .contact-container button[type="submit"]:active {
@@ -1032,6 +1051,7 @@ body.contact-page::before {
     justify-content: center;
     background: linear-gradient(135deg, rgba(188, 7, 212, 0.1), rgba(84, 12, 120, 0.1));
     border-radius: 50%;
+    position: relative;
 }
 
 .achievement-icon img {
@@ -1209,12 +1229,6 @@ body.contact-page::before {
     display: inline-block;
 }
 
-.btn-primary {
-    background: linear-gradient(135deg, #bc07d4, #540c78);
-    color: #ffffff;
-    border: none;
-}
-
 .btn-primary:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 25px rgba(188, 7, 212, 0.4);
@@ -1278,6 +1292,17 @@ body.contact-page::before {
         gap: 40px;
     }
     
+
+    .hero-text {
+        /* ... gaya hero-text tablet lainnya ... */
+        /* Tambahkan ini jika belum ada untuk memastikan konten teksnya rata tengah */
+        text-align: center; 
+    }
+
+    .btn-about-me {
+        align-self: center; /* TOMBOL DI TENGAH UNTUK TABLET */
+    }
+
     .hero-image img {
         width: 280px;
         height: 350px;
@@ -1457,32 +1482,52 @@ body.contact-page::before {
     }
     
     .timeline::before {
-        left: 20px;
-        transform: none;
+        left: 20px; /* Garis dasar ke kiri */
+        transform: none; /* Hilangkan centering */
+    }
+
+    .timeline-progress-fill { /* Garis pengisi ke kiri */
+        left: 20px; /* Sesuaikan dengan garis dasar */
+        transform: none; /* Hilangkan centering */
     }
     
     .timeline-dot {
-        left: 20px;
-        transform: none;
+        left: 20px; /* Dot ke kiri */
+        transform: none; /* Hilangkan centering */
         width: 14px;
         height: 14px;
+        /* Perbarui transisi agar tidak ada translateX(-50%) */
+        transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.6s ease-out;
+    }
+    
+    /* Perbarui class .is-in-view agar tidak ada translateX(-50%) */
+    .timeline-dot.is-in-view {
+        transform: scale(1); /* Hanya scale */
+    }
+
+    /* Perbarui keyframes dotPulse agar tidak ada translateX(-50%) */
+    @keyframes dotPulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 4px rgba(188, 7, 212, 0.2); }
+        50% { transform: scale(1.3); box-shadow: 0 0 0 10px rgba(188, 7, 212, 0.4); }
+        100% { transform: scale(1); box-shadow: 0 0 0 4px rgba(188, 7, 212, 0.2); }
     }
     
     .timeline-item:hover .timeline-dot {
+        /* Tetap atur ini jika ingin hover tetap ada, tanpa translateX(-50%) */
         transform: scale(1.2);
     }
     
     .timeline-item:nth-child(odd) .timeline-content,
     .timeline-item:nth-child(even) .timeline-content {
-        width: calc(100% - 60px);
-        margin-left: 50px;
-        margin-right: 0;
+        width: calc(100% - 70px); /* Disesuaikan: 50px margin kiri + 20px margin kanan */
+        margin-left: 50px; /* Jarak dari kiri */
+        margin-right: 20px; /* Jarak dari kanan */
         text-align: left;
     }
     
     .timeline-item:nth-child(odd) .timeline-content::after,
     .timeline-item:nth-child(even) .timeline-content::after {
-        left: -20px;
+        left: -20px; /* Panah tetap sejajar dengan garis */
         right: auto;
         border-right: 10px solid #ffffff;
         border-left: 10px solid transparent;
@@ -1682,12 +1727,22 @@ body.contact-page::before {
         height: 250px;
     }
     
+
+    .btn-about-me {
+        align-self: center; /* TOMBOL DI TENGAH UNTUK SANGAT KECIL */
+    }
+    
     .about {
         padding: 50px 15px;
     }
     
     .timeline::before {
         left: 15px;
+    }
+
+    .timeline-progress-fill { /* Garis pengisi ke kiri */
+        left: 15px;
+        transform: none;
     }
     
     .timeline-dot {
@@ -1698,8 +1753,9 @@ body.contact-page::before {
     
     .timeline-item:nth-child(odd) .timeline-content,
     .timeline-item:nth-child(even) .timeline-content {
-        width: calc(100% - 45px);
+        width: calc(100% - 60px); /* Disesuaikan: perkiraan 35px margin kiri + 25px margin kanan */
         margin-left: 35px;
+        margin-right: 25px;
     }
     
     .foot {
