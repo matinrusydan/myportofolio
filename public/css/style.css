@@ -15,92 +15,6 @@ body {
 }
 
 /* =================================
-   NAVIGATION
-   ================================= */
-.navbar {
-    width: 100%;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #000000;
-    position: fixed;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.nav-content {
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo-matbrew {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.logo-matbrew p {
-    font-size: 24px;
-    font-weight: 600;
-    color: #ffffff;
-}
-
-.logo-matbrew img {
-    width: 46px;
-    height: 46px;
-}
-
-.btn-nav {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-}
-
-.btn-nav a {
-    text-decoration: none;
-    font-size: 16px;
-    color: #ffffff;
-    font-weight: 400;
-    transition: color 0.3s ease;
-}
-
-.btn-nav a:hover {
-    color: #bc07d4;
-}
-
-.btn-nav img {
-    width: 44px;
-    height: 44px;
-    transition: transform 0.3s ease;
-}
-
-.btn-nav img:hover {
-    transform: scale(1.1);
-}
-
-/* Hamburger Menu */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 6px;
-}
-
-.hamburger span {
-    width: 30px;
-    height: 4px;
-    background: white;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-/* =================================
    HERO SECTION
    ================================= */
 .hero {
@@ -117,6 +31,7 @@ body {
     max-width: 1200px;
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Menjaga jarak antar elemen hero-text dan hero-image */
     gap: 60px;
 }
 
@@ -134,7 +49,7 @@ body {
     line-height: 1.2;
 }
 
-.hero-text h2 {
+.hero-text h2 { /* Ini adalah gaya untuk h2 di Index Hero, yang mungkin akan menjadi padanan untuk about-subtitle */
     font-size: clamp(24px, 4vw, 36px);
     font-weight: 500;
     background: linear-gradient(135deg, #bc07d4, #540c78);
@@ -144,7 +59,7 @@ body {
     line-height: 1.2;
 }
 
-.hero-text h3 {
+.hero-text h3 { /* Ini adalah gaya untuk h3 di Index Hero, yang mungkin akan menjadi padanan untuk about-description */
     font-size: clamp(16px, 2.5vw, 20px);
     font-weight: 300;
     color: #CCCCCC;
@@ -186,7 +101,7 @@ body {
 }
 
 /* =================================
-   ABOUT SECTION
+   ABOUT SECTION (Umum untuk bagian "About" secara keseluruhan)
    ================================= */
 .about {
     background-color: #FFFFFF;
@@ -498,140 +413,6 @@ body {
 }
 
 /* =================================
-   FOOTER
-   ================================= */
-.foot {
-    width: 100%;
-    background: #000000;
-    padding: 60px 20px 30px;
-    color: #ffffff;
-}
-
-.top {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.col-1, .col-2 {
-    display: flex;
-    gap: 30px;
-}
-
-.useful, .legal, .block, .block-2 {
-    flex: 1;
-}
-
-.useful .title,
-.legal .title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 15px;
-    text-decoration: none;
-}
-
-.vertical-auto-layout,
-.legal-autolayout-vertical {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.vertical-auto-layout a,
-.legal-autolayout-vertical a {
-    color: #cccccc;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease;
-}
-
-.vertical-auto-layout a:hover,
-.legal-autolayout-vertical a:hover {
-    color: #bc07d4;
-}
-
-.block .list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-bottom: 15px;
-}
-
-.block .list a {
-    color: #cccccc;
-    text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease;
-}
-
-.block .list a:hover {
-    color: #bc07d4;
-}
-
-.list-2 {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.whatsapp, .telegram {
-    width: 24px;
-    height: 24px;
-    transition: transform 0.3s ease;
-}
-
-.whatsapp:hover, .telegram:hover {
-    transform: scale(1.1);
-}
-
-.btn {
-    padding: 12px 24px;
-    background: #ffffff;        /* Putih */
-    color: #000000;             /* Hitam */
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.btn:hover {
-    background: #540c78;        /* Ungu tua */
-    color: #ffffff;             /* Putih */
-    transform: translateY(-2px);
-}
-
-
-.address {
-    font-size: 14px;
-    color: #cccccc;
-    margin-top: 10px;
-    line-height: 1.5;
-}
-
-.bottom {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 30px;
-    border-top: 1px solid #333;
-    font-size: 14px;
-}
-
-.bottom p {
-    color: #cccccc;
-    margin: 0;
-}
-
-/* =================================
    CONTACT PAGE
    ================================= */
 body.contact-page {
@@ -938,87 +719,14 @@ body.contact-page::before {
     line-height: 1.5;
 }
 
-
-
 /* =================================
-   ABOUT PAGE STYLES
+   ABOUT PAGE STYLES (Untuk gaya spesifik pada halaman 'about' yang tidak terkait hero)
    ================================= */
-
 .about-page {
     background-color: #000000;
     min-height: 100vh;
 }
 
-/* =================================
-   ABOUT HERO SECTION
-   ================================= */
-.about-hero {
-    width: 100%;
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 120px 20px 80px;
-    background: linear-gradient(135deg, rgba(188, 7, 212, 0.1) 0%, rgba(84, 12, 120, 0.1) 100%);
-}
-
-.about-hero-content {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    align-items: center;
-    gap: 60px;
-}
-
-.about-hero-text {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.about-hero-text h1 {
-    font-size: clamp(36px, 5vw, 52px);
-    font-weight: 700;
-    color: #FFFFFF;
-    line-height: 1.2;
-    margin-bottom: 10px;
-}
-
-.about-subtitle {
-    font-size: clamp(20px, 3vw, 28px);
-    font-weight: 500;
-    background: linear-gradient(135deg, #bc07d4, #540c78);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 15px;
-}
-
-.about-description {
-    font-size: clamp(16px, 2vw, 18px);
-    font-weight: 300;
-    color: #CCCCCC;
-    line-height: 1.7;
-    max-width: 600px;
-}
-
-.about-hero-image {
-    flex: 0 0 auto;
-}
-
-.about-hero-image img {
-    width: 350px;
-    height: 420px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(188, 7, 212, 0.3);
-    transition: transform 0.3s ease;
-}
-
-.about-hero-image img:hover {
-    transform: translateY(-10px);
-}
 
 /* =================================
    SKILLS SECTION
@@ -1085,7 +793,6 @@ body.contact-page::before {
 .skill-icon-placeholder {
     font-size: 24px;
     font-weight: 700;
-    color: #bc07d4;
     background: linear-gradient(135deg, #bc07d4, #540c78);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1547,10 +1254,6 @@ body.contact-page::before {
 
 /* Tablet Styles */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-    .nav-content {
-        padding: 0 40px;
-    }
-    
     .hero {
         padding: 140px 40px 80px;
     }
@@ -1575,18 +1278,7 @@ body.contact-page::before {
     .testimonials-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    .about-hero {
-        padding: 140px 40px 80px;
-    }
-    
-    .about-hero-content {
-        gap: 40px;
-    }
-    
-    .about-hero-image img {
-        width: 300px;
-        height: 360px;
-    }
+    /* about-hero styles are now handled by .hero */
     
     .skills-section, .experience-section, .achievements-section, .personal-section, .cta-section {
         padding: 70px 40px;
@@ -1684,39 +1376,6 @@ body.contact-page::before {
 
 /* Mobile Styles */
 @media screen and (max-width: 767px) {
-    .btn-nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 80px;
-        left: 0;
-        right: 0;
-        background: #000;
-        padding: 20px;
-        text-align: center;
-        z-index: 1000;
-    }
-
-    .btn-nav.active {
-        display: flex;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .hamburger.open span:nth-child(1) {
-        transform: translateY(10px) rotate(45deg);
-    }
-
-    .hamburger.open span:nth-child(2) {
-        opacity: 0;
-    }
-
-    .hamburger.open span:nth-child(3) {
-        transform: translateY(-10px) rotate(-45deg);
-    }
-    
     .hero {
         padding: 120px 20px 60px;
     }
@@ -1782,48 +1441,7 @@ body.contact-page::before {
         gap: 25px;
     }
     
-    .top {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .col-1, .col-2 {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    .bottom {
-        flex-direction: column;
-        gap: 15px;
-        text-align: center;
-    }
-    
-    .contact-container {
-        margin: 100px 20px 50px;
-        padding: 30px 20px;
-    }
-     .about-hero {
-        padding: 120px 20px 60px;
-    }
-    
-    .about-hero-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
-    }
-    
-    .about-hero-text {
-        order: 2;
-    }
-    
-    .about-hero-image {
-        order: 1;
-    }
-    
-    .about-hero-image img {
-        width: 280px;
-        height: 340px;
-    }
+    /* about-hero styles are now handled by .hero */
     
     .skills-section, .experience-section, .achievements-section, .personal-section, .cta-section {
         padding: 60px 20px;
@@ -1981,10 +1599,6 @@ body.contact-page::before {
 
 /* Extra Small Mobile */
 @media screen and (max-width: 480px) {
-    .nav-content {
-        padding: 0 15px;
-    }
-    
     .hero {
         padding: 120px 15px 50px;
     }
@@ -2014,17 +1628,7 @@ body.contact-page::before {
         margin-left: 35px;
     }
     
-    .foot {
-        padding: 40px 15px 20px;
-    }
-    .about-hero {
-        padding: 120px 15px 50px;
-    }
-    
-    .about-hero-image img {
-        width: 240px;
-        height: 300px;
-    }
+    /* about-hero styles are now handled by .hero */
     
     .skills-section, .experience-section, .achievements-section, .personal-section, .cta-section {
         padding: 50px 15px;
@@ -2164,8 +1768,7 @@ body.contact-page::before {
     .timeline-content,
     .project-card,
     .testimonial-card,
-    .btn-about-me,
-    .btn {
+    .btn-about-me {
         transition: none;
     }
     .skill-card,
@@ -2180,7 +1783,7 @@ body.contact-page::before {
         transition: none;
     }
     
-    .about-hero-image img,
+    .hero-image img, /* Updated to target .hero-image img */
     .image-wrapper img,
     .experience-dot,
     .experience-content,
@@ -2236,11 +1839,6 @@ body.contact-page::before {
 
 /* Print Styles */
 @media print {
-    .navbar,
-    .foot {
-        display: none;
-    }
-    
     .hero {
         padding: 20px;
     }
@@ -2253,9 +1851,7 @@ body.contact-page::before {
         background: #cccccc !important;
         box-shadow: none !important;
     }
-    .about-hero {
-        padding: 20px;
-    }
+    /* about-hero styles are now handled by .hero */
     
     .skills-section, .experience-section, .achievements-section, .personal-section {
         padding: 30px 20px;

@@ -1,0 +1,182 @@
+/* =================================
+   FOOTER
+   ================================= */
+.foot {
+    width: 100%;
+    background: #000000;
+    padding: 60px 20px 30px;
+    color: #ffffff;
+}
+
+.top {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.col-1, .col-2 {
+    display: flex;
+    gap: 30px;
+}
+
+.useful, .legal, .block, .block-2 {
+    flex: 1;
+}
+
+.useful .title,
+.legal .title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 15px;
+    text-decoration: none;
+}
+
+.vertical-auto-layout,
+.legal-autolayout-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.vertical-auto-layout a,
+.legal-autolayout-vertical a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.vertical-auto-layout a:hover,
+.legal-autolayout-vertical a:hover {
+    color: #bc07d4;
+}
+
+.block .list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.block .list a {
+    color: #cccccc;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.block .list a:hover {
+    color: #bc07d4;
+}
+
+.list-2 {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.whatsapp, .telegram {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp:hover, .telegram:hover {
+    transform: scale(1.1);
+}
+
+.btn {
+    padding: 12px 24px;
+    background: #ffffff;          /* Putih */
+    color: #000000;                /* Hitam */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: #540c78;          /* Ungu tua */
+    color: #ffffff;                /* Putih */
+    transform: translateY(-2px);
+}
+
+.address {
+    font-size: 14px;
+    color: #cccccc;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid #333;
+    font-size: 14px;
+}
+
+.bottom p {
+    color: #cccccc;
+    margin: 0;
+}
+
+/* Responsive Design for Footer */
+
+/* Tablet Styles */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    /* No specific footer adjustments mentioned for tablets in original CSS,
+       but padding adjustments from other sections apply here. */
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 767px) {
+    .top {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .col-1, .col-2 {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+/* Extra Small Mobile */
+@media screen and (max-width: 480px) {
+    .foot {
+        padding: 40px 15px 20px;
+    }
+}
+
+/* Accessibility & Performance */
+@media (prefers-reduced-motion: reduce) {
+    .foot .btn,
+    .foot .whatsapp,
+    .foot .telegram {
+        transition: none;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .foot {
+        display: none;
+    }
+}

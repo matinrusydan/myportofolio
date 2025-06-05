@@ -4,22 +4,26 @@
 
 @section('content')
 <div class="about-page">
-    <!-- About Hero Section -->
-    <section class="about-hero" id="about-hero">
-        <div class="about-hero-content">
-            <div class="about-hero-image">
+    <section class="hero" id="about-hero">
+        <div class="hero-content">
+            {{-- Perhatian: Urutan div hero-text dan hero-image disesuaikan dengan index.blade.php --}}
+            <div class="hero-text">
+                <h1>About {{ $profile->name ?? 'Matin Rusydan' }}</h1>
+                {{-- Mengubah p.about-subtitle menjadi h2 --}}
+                <h2>{{ $profile->title ?? 'Data Engineer' }}</h2>
+                {{-- Mengubah p.about-description menjadi h3 --}}
+                <h3>
+                    {{ $profile->about ?? 'Passionate about transforming raw data into meaningful insights. With years of experience in data engineering, I specialize in building robust data pipelines, optimizing database performance, and creating scalable solutions that drive business growth.' }}
+                </h3>
+                {{-- Menambahkan button yang ada di index hero --}}
+                <button class="btn-about-me">About Me</button>
+            </div>
+            <div class="hero-image">
                 @if($profile && $profile->photo)
                     <img src="{{ asset('storage/' . $profile->photo) }}" alt="{{ $profile->name }}">
                 @else
                     <img src="{{ asset('images/foto-matin.png') }}" alt="matin rusydan">
                 @endif
-            </div>
-            <div class="about-hero-text">
-                <h1>About {{ $profile->name ?? 'Matin Rusydan' }}</h1>
-                <p class="about-subtitle">{{ $profile->title ?? 'Data Engineer' }}</p>
-                <p class="about-description">
-                    {{ $profile->about ?? 'Passionate about transforming raw data into meaningful insights. With years of experience in data engineering, I specialize in building robust data pipelines, optimizing database performance, and creating scalable solutions that drive business growth.' }}
-                </p>
             </div>
         </div>
     </section>
@@ -220,7 +224,7 @@
                     </div>
                     @endforeach
                 @else
-                    <!-- Default Achievements if none in database -->
+                    <!-- Default Achievements if none in database
                     <div class="achievement-card">
                         <div class="achievement-icon">
                             <div class="achievement-icon-default">🎓</div>
@@ -247,7 +251,7 @@
                         <p class="achievement-issuer">Google Cloud</p>
                         <p class="achievement-date">2021</p>
                         <p class="achievement-description">Certified in designing and building data processing systems</p>
-                    </div>
+                    </div> -->
                 @endif
             </div>
         </div>

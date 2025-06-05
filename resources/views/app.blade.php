@@ -6,6 +6,8 @@
     <title>@yield('title', 'Portfolio Matin Rusydan')</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/navbar.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="@yield('body-class')">
