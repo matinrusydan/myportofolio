@@ -445,7 +445,7 @@ body.contact-page::before {
 /* Contact Container */
 .contact-container {
     max-width: 900px;
-    width: 100%;
+    width: calc(100% - 40px); /* Memastikan ada padding samping di layar lebar */
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(20px);
     border-radius: 25px;
@@ -500,7 +500,7 @@ body.contact-page::before {
 }
 
 .contact-description {
-    font-size: 16px;
+    font-size: clamp(15px, 2.2vw, 16px); /* Memakai clamp untuk fluidity */
     color: #cccccc;
     line-height: 1.6;
     max-width: 600px;
@@ -528,7 +528,7 @@ body.contact-page::before {
     font-weight: 500;
     color: #ffffff;
     margin-bottom: 8px;
-    font-size: 14px;
+    font-size: clamp(12px, 2vw, 14px); /* Memakai clamp untuk fluidity */
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
@@ -542,7 +542,7 @@ body.contact-page::before {
     border-radius: 12px;
     color: #ffffff;
     font-family: 'Poppins', sans-serif;
-    font-size: 16px;
+    font-size: clamp(14px, 2.2vw, 16px); /* Memakai clamp untuk fluidity */
     transition: all 0.3s ease;
     backdrop-filter: blur(10px);
 }
@@ -572,7 +572,7 @@ body.contact-page::before {
     position: absolute;
     bottom: 10px;
     right: 15px;
-    font-size: 12px;
+    font-size: clamp(10px, 1.8vw, 12px); /* Memakai clamp untuk fluidity */
     color: rgba(255, 255, 255, 0.6);
     pointer-events: none;
 }
@@ -585,7 +585,7 @@ body.contact-page::before {
     border: none;
     border-radius: 12px;
     font-family: 'Poppins', sans-serif;
-    font-size: 16px;
+    font-size: clamp(14px, 2.5vw, 16px); /* Memakai clamp untuk fluidity */
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -624,7 +624,7 @@ body.contact-page::before {
     margin-top: 20px;
     padding: 15px 20px;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: clamp(12px, 2.2vw, 14px); /* Memakai clamp untuk fluidity */
     font-weight: 500;
     text-align: center;
 }
@@ -708,19 +708,19 @@ body.contact-page::before {
 
 .info-card h3 {
     color: #ffffff;
-    font-size: 16px;
+    font-size: clamp(14px, 2.2vw, 16px); /* Memakai clamp untuk fluidity */
     font-weight: 600;
     margin-bottom: 8px;
 }
 
 .info-card p {
     color: #cccccc;
-    font-size: 14px;
+    font-size: clamp(12px, 1.8vw, 14px); /* Memakai clamp untuk fluidity */
     line-height: 1.5;
 }
 
 /* =================================
-   ABOUT PAGE STYLES (Untuk gaya spesifik pada halaman 'about' yang tidak terkait hero)
+   ABOUT PAGE STYLES (Umum untuk halaman 'about' yang tidak terkait hero)
    ================================= */
 .about-page {
     background-color: #000000;
@@ -1247,6 +1247,18 @@ body.contact-page::before {
     }
 }
 
+/* Animation for hero image on About page load */
+.animated-left-on-load {
+    opacity: 0;
+    transform: translateX(-50px); /* Mulai sedikit di luar layar dari kiri */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Transisi untuk animasi */
+}
+
+.animated-left-on-load.is-visible {
+    opacity: 1;
+    transform: translateX(0); /* Posisi akhir */
+}
+
 
 /* =================================
    RESPONSIVE DESIGN
@@ -1254,6 +1266,10 @@ body.contact-page::before {
 
 /* Tablet Styles */
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .nav-content {
+        padding: 0 40px;
+    }
+    
     .hero {
         padding: 140px 40px 80px;
     }
@@ -1304,7 +1320,7 @@ body.contact-page::before {
         margin-left: 60px;
     }
     .contact-container {
-        margin: 100px 40px 50px;
+        margin: 100px auto 50px; /* Gunakan auto untuk horizontal centering */
         padding: 50px 35px;
     }
     
@@ -1321,7 +1337,7 @@ body.contact-page::before {
     }
     
     .contact-description {
-        font-size: 15px;
+        font-size: clamp(14px, 2vw, 15px); /* Menyesuaikan clamp */
     }
     
     .form-row {
@@ -1332,10 +1348,14 @@ body.contact-page::before {
         gap: 20px;
     }
     
+    .contact-container label {
+        font-size: clamp(11px, 1.8vw, 13px); /* Menyesuaikan clamp */
+    }
+    
     .contact-container input, 
     .contact-container textarea {
         padding: 14px 18px;
-        font-size: 15px;
+        font-size: clamp(13px, 2vw, 15px); /* Menyesuaikan clamp */
     }
     
     .contact-container textarea {
@@ -1344,7 +1364,7 @@ body.contact-page::before {
     
     .contact-container button[type="submit"] {
         padding: 16px 35px;
-        font-size: 15px;
+        font-size: clamp(13px, 2.2vw, 15px); /* Menyesuaikan clamp */
     }
     
     .contact-info {
@@ -1366,16 +1386,49 @@ body.contact-page::before {
     }
     
     .info-card h3 {
-        font-size: 15px;
+        font-size: clamp(13px, 2vw, 15px); /* Menyesuaikan clamp */
     }
     
     .info-card p {
-        font-size: 13px;
+        font-size: clamp(11px, 1.6vw, 13px); /* Menyesuaikan clamp */
     }
 }
 
 /* Mobile Styles */
 @media screen and (max-width: 767px) {
+    .btn-nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        right: 0;
+        background: #000;
+        padding: 20px;
+        text-align: center;
+        z-index: 1000;
+    }
+
+    .btn-nav.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hamburger.open span:nth-child(1) {
+        transform: translateY(10px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+    
     .hero {
         padding: 120px 20px 60px;
     }
@@ -1441,6 +1494,22 @@ body.contact-page::before {
         gap: 25px;
     }
     
+    .top {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .col-1, .col-2 {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
     /* about-hero styles are now handled by .hero */
     
     .skills-section, .experience-section, .achievements-section, .personal-section, .cta-section {
@@ -1499,9 +1568,10 @@ body.contact-page::before {
         text-align: center;
     }
     .contact-container {
-        margin: 80px 20px 30px;
+        margin: 80px auto 30px; /* Gunakan auto untuk horizontal centering */
         padding: 30px 25px;
         border-radius: 20px;
+        width: calc(100% - 40px); /* Memastikan ada padding samping */
     }
     
     .contact-header {
@@ -1519,12 +1589,12 @@ body.contact-page::before {
     }
     
     .contact-description {
-        font-size: 14px;
+        font-size: clamp(13px, 3.5vw, 14px); /* Menyesuaikan clamp */
         line-height: 1.5;
     }
     
     .form-row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Memastikan kolom bertumpuk */
         gap: 20px;
     }
     
@@ -1533,14 +1603,14 @@ body.contact-page::before {
     }
     
     .contact-container label {
-        font-size: 13px;
+        font-size: clamp(11px, 2.8vw, 13px); /* Menyesuaikan clamp */
         margin-bottom: 6px;
     }
     
     .contact-container input, 
     .contact-container textarea {
         padding: 14px 16px;
-        font-size: 14px;
+        font-size: clamp(13px, 3vw, 14px); /* Menyesuaikan clamp */
         border-radius: 10px;
     }
     
@@ -1549,14 +1619,14 @@ body.contact-page::before {
     }
     
     .char-counter {
-        font-size: 11px;
+        font-size: clamp(9px, 2vw, 11px); /* Menyesuaikan clamp */
         bottom: 8px;
         right: 12px;
     }
     
     .contact-container button[type="submit"] {
         padding: 16px 30px;
-        font-size: 14px;
+        font-size: clamp(13px, 3.5vw, 14px); /* Menyesuaikan clamp */
         border-radius: 10px;
         margin-top: 10px;
     }
@@ -1564,12 +1634,12 @@ body.contact-page::before {
     .message-error, .message-success {
         margin-top: 15px;
         padding: 12px 16px;
-        font-size: 13px;
+        font-size: clamp(11px, 2.5vw, 13px); /* Menyesuaikan clamp */
         border-radius: 6px;
     }
     
     .contact-info {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr; /* Memastikan kolom bertumpuk */
         gap: 15px;
         margin-top: 30px;
         padding-top: 30px;
@@ -1588,17 +1658,21 @@ body.contact-page::before {
     }
     
     .info-card h3 {
-        font-size: 14px;
+        font-size: clamp(13px, 2.8vw, 14px); /* Menyesuaikan clamp */
         margin-bottom: 6px;
     }
     
     .info-card p {
-        font-size: 12px;
+        font-size: clamp(10px, 2.2vw, 12px); /* Menyesuaikan clamp */
     }
 }
 
 /* Extra Small Mobile */
 @media screen and (max-width: 480px) {
+    .nav-content {
+        padding: 0 15px;
+    }
+    
     .hero {
         padding: 120px 15px 50px;
     }
@@ -1628,6 +1702,9 @@ body.contact-page::before {
         margin-left: 35px;
     }
     
+    .foot {
+        padding: 40px 15px 20px;
+    }
     /* about-hero styles are now handled by .hero */
     
     .skills-section, .experience-section, .achievements-section, .personal-section, .cta-section {
@@ -1659,9 +1736,10 @@ body.contact-page::before {
         height: 280px;
     }
     .contact-container {
-        margin: 70px 15px 25px;
+        margin: 70px auto 25px; /* Gunakan auto untuk horizontal centering */
         padding: 25px 20px;
         border-radius: 18px;
+        width: calc(100% - 30px); /* Memastikan ada padding samping */
     }
     
     .contact-header {
@@ -1679,7 +1757,7 @@ body.contact-page::before {
     }
     
     .contact-description {
-        font-size: 13px;
+        font-size: clamp(12px, 4vw, 13px); /* Menyesuaikan clamp */
     }
     
     .contact-form {
@@ -1691,14 +1769,13 @@ body.contact-page::before {
     }
     
     .contact-container label {
-        font-size: 12px;
-        margin-bottom: 5px;
+        font-size: clamp(10px, 3.5vw, 12px); /* Menyesuaikan clamp */
     }
     
     .contact-container input, 
     .contact-container textarea {
         padding: 12px 14px;
-        font-size: 13px;
+        font-size: clamp(12px, 3.5vw, 13px); /* Menyesuaikan clamp */
         border-radius: 8px;
     }
     
@@ -1707,14 +1784,14 @@ body.contact-page::before {
     }
     
     .char-counter {
-        font-size: 10px;
+        font-size: clamp(8px, 2.5vw, 10px); /* Menyesuaikan clamp */
         bottom: 6px;
         right: 10px;
     }
     
     .contact-container button[type="submit"] {
         padding: 14px 25px;
-        font-size: 13px;
+        font-size: clamp(12px, 4vw, 13px); /* Menyesuaikan clamp */
         border-radius: 8px;
         margin-top: 8px;
     }
@@ -1722,7 +1799,7 @@ body.contact-page::before {
     .message-error, .message-success {
         margin-top: 12px;
         padding: 10px 14px;
-        font-size: 12px;
+        font-size: clamp(10px, 3vw, 12px); /* Menyesuaikan clamp */
         border-radius: 5px;
     }
     
@@ -1745,12 +1822,12 @@ body.contact-page::before {
     }
     
     .info-card h3 {
-        font-size: 13px;
+        font-size: clamp(12px, 3.5vw, 13px); /* Menyesuaikan clamp */
         margin-bottom: 5px;
     }
     
     .info-card p {
-        font-size: 11px;
+        font-size: clamp(9px, 2.8vw, 11px); /* Menyesuaikan clamp */
     }
 }
 
@@ -1835,10 +1912,21 @@ body.contact-page::before {
     .info-card:hover {
         transform: none;
     }
+    
+    .animated-left-on-load {
+        transition: none; /* Nonaktifkan transisi jika pengguna memilih reduced motion */
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Print Styles */
 @media print {
+    .navbar,
+    .foot {
+        display: none;
+    }
+    
     .hero {
         padding: 20px;
     }

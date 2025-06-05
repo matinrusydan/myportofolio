@@ -6,312 +6,152 @@
 <div class="about-page">
     <section class="hero" id="about-hero">
         <div class="hero-content">
-            {{-- Perhatian: Urutan div hero-text dan hero-image disesuaikan dengan index.blade.php --}}
-            <div class="hero-text">
-                <h1>About {{ $profile->name ?? 'Matin Rusydan' }}</h1>
-                {{-- Mengubah p.about-subtitle menjadi h2 --}}
-                <h2>{{ $profile->title ?? 'Data Engineer' }}</h2>
-                {{-- Mengubah p.about-description menjadi h3 --}}
-                <h3>
-                    {{ $profile->about ?? 'Passionate about transforming raw data into meaningful insights. With years of experience in data engineering, I specialize in building robust data pipelines, optimizing database performance, and creating scalable solutions that drive business growth.' }}
-                </h3>
-                {{-- Menambahkan button yang ada di index hero --}}
-                <button class="btn-about-me">About Me</button>
-            </div>
-            <div class="hero-image">
+            {{-- Posisi hero-image di kiri untuk halaman About --}}
+            <div class="hero-image animated-left-on-load"> {{-- Tambahkan class ini untuk animasi --}}
                 @if($profile && $profile->photo)
                     <img src="{{ asset('storage/' . $profile->photo) }}" alt="{{ $profile->name }}">
                 @else
                     <img src="{{ asset('images/foto-matin.png') }}" alt="matin rusydan">
                 @endif
             </div>
+            {{-- Posisi hero-text di kanan untuk halaman About --}}
+            <div class="hero-text">
+                <h1>About {{ $profile->name ?? 'Matin Rusydan' }}</h1>
+                <h2>{{ $profile->title ?? 'Data Engineer' }}</h2>
+                <h3>
+                    {{ $profile->about ?? 'Passionate about transforming raw data into meaningful insights. With years of experience in data engineering, I specialize in building robust data pipelines, optimizing database performance, and creating scalable solutions that drive business growth.' }}
+                </h3>
+                <button class="btn-about-me">About Me</button>
+            </div>
         </div>
     </section>
 
-
-    <!-- Skills Section -->
     <section class="skills-section">
         <div class="container">
             <div class="section-header">
-                <h2>Skills & Expertise</h2>
-                <p>Technologies and tools I work with to deliver exceptional results</p>
+                <h4>Skills & Expertise</h4>
+                <h5>Technologies and tools I work with to deliver exceptional results.</h5>
             </div>
             
             <div class="skills-grid">
-                @if(isset($skills) && $skills->count() > 0)
-                    @foreach($skills as $skill)
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            @if($skill->icon)
-                                <img src="{{ asset('storage/' . $skill->icon) }}" alt="{{ $skill->name }}">
-                            @else
-                                <div class="skill-icon-placeholder">{{ substr($skill->name, 0, 2) }}</div>
-                            @endif
-                        </div>
-                        <h3>{{ $skill->name }}</h3>
-                        <p>{{ $skill->description ?? 'Proficient in ' . $skill->name }}</p>
-                        @if($skill->level)
-                            <div class="skill-level">
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: {{ $skill->level }}%"></div>
-                                </div>
-                                <span class="skill-percentage">{{ $skill->level }}%</span>
-                            </div>
+                @foreach($skills as $index => $skill)
+                <div class="skill-card" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                    <div class="skill-icon">
+                        @if($skill->icon)
+                            <img src="{{ asset('storage/' . $skill->icon) }}" alt="{{ $skill->name }}">
+                        @else
+                            <span class="skill-icon-placeholder">{{ strtoupper(substr($skill->name, 0, 2)) }}</span>
                         @endif
                     </div>
-                    @endforeach
-                @else
-                    <!-- Default Skills if none in database
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <div class="skill-icon-placeholder">PY</div>
+                    <h3>{{ $skill->name }}</h3>
+                    <p>{{ $skill->description }}</p>
+                    <div class="skill-level">
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: {{ $skill->level }}%;"></div>
                         </div>
-                        <h3>Python</h3>
-                        <p>Advanced programming for data analysis and ETL processes</p>
-                        <div class="skill-level">
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 95%"></div>
-                            </div>
-                            <span class="skill-percentage">95%</span>
-                        </div>
+                        <span class="skill-percentage">{{ $skill->level }}%</span>
                     </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <div class="skill-icon-placeholder">SQL</div>
-                        </div>
-                        <h3>SQL</h3>
-                        <p>Database design, optimization, and complex query writing</p>
-                        <div class="skill-level">
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
-                            </div>
-                            <span class="skill-percentage">90%</span>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <div class="skill-icon-placeholder">AW</div>
-                        </div>
-                        <h3>AWS</h3>
-                        <p>Cloud infrastructure and data services management</p>
-                        <div class="skill-level">
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
-                            </div>
-                            <span class="skill-percentage">85%</span>
-                        </div>
-                    </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">
-                            <div class="skill-icon-placeholder">SP</div>
-                        </div>
-                        <h3>Apache Spark</h3>
-                        <p>Big data processing and distributed computing</p>
-                        <div class="skill-level">
-                            <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
-                            </div>
-                            <span class="skill-percentage">80%</span>
-                        </div>
-                    </div> -->
-                @endif
+                </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
     <section class="experience-section">
         <div class="container">
             <div class="section-header">
-                <h2>Work Experience</h2>
-                <p>My professional journey in the tech industry</p>
+                <h4>Experience</h4>
+                <h5>My professional journey and key roles held.</h5>
             </div>
-            
             <div class="experience-timeline">
-                @if(isset($experiences) && $experiences->count() > 0)
-                    @foreach($experiences as $index => $experience)
-                    <div class="experience-item" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
-                        <div class="experience-dot"></div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <div class="experience-period">{{ $experience->start_date }} - {{ $experience->end_date ?? 'Present' }}</div>
-                                <div class="experience-company">{{ $experience->company }}</div>
-                            </div>
-                            <h3 class="experience-title">{{ $experience->position }}</h3>
-                            <p class="experience-description">{{ $experience->description }}</p>
-                            @if($experience->technologies)
-                                <div class="experience-tech">
-                                    @foreach(explode(',', $experience->technologies) as $tech)
-                                        <span class="tech-tag">{{ trim($tech) }}</span>
-                                    @endforeach
-                                </div>
-                            @endif
+                @foreach($experiences as $index => $experience)
+                <div class="experience-item" data-aos="fade-right" data-aos-delay="{{ $index * 100 }}">
+                    <div class="experience-dot"></div>
+                    <div class="experience-content">
+                        <div class="experience-header">
+                            <span class="experience-period">{{ $experience->start_date->format('M Y') }} - {{ $experience->end_date ? $experience->end_date->format('M Y') : 'Present' }}</span>
+                            <span class="experience-company">{{ $experience->company }}</span>
+                        </div>
+                        <h6 class="experience-title">{{ $experience->title }}</h6>
+                        <p class="experience-description">{{ $experience->description }}</p>
+                        <div class="experience-tech">
+                            @foreach(explode(',', $experience->technologies) as $tech)
+                                <span class="tech-tag">{{ trim($tech) }}</span>
+                            @endforeach
                         </div>
                     </div>
-                    @endforeach
-                @else
-                    <!-- Default Experience if none in database -->
-                    <!-- <div class="experience-item">
-                        <div class="experience-dot"></div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <div class="experience-period">2022 - Present</div>
-                                <div class="experience-company">Tech Solutions Inc.</div>
-                            </div>
-                            <h3 class="experience-title">Senior Data Engineer</h3>
-                            <p class="experience-description">
-                                Led the development of data pipeline architecture, implemented ETL processes, 
-                                and optimized database performance for large-scale applications serving millions of users.
-                            </p>
-                            <div class="experience-tech">
-                                <span class="tech-tag">Python</span>
-                                <span class="tech-tag">Apache Spark</span>
-                                <span class="tech-tag">AWS</span>
-                                <span class="tech-tag">PostgreSQL</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="experience-item">
-                        <div class="experience-dot"></div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <div class="experience-period">2020 - 2022</div>
-                                <div class="experience-company">DataFlow Corp</div>
-                            </div>
-                            <h3 class="experience-title">Data Engineer</h3>
-                            <p class="experience-description">
-                                Designed and maintained data warehouses, developed automated reporting systems, 
-                                and collaborated with analytics teams to deliver actionable business insights.
-                            </p>
-                            <div class="experience-tech">
-                                <span class="tech-tag">SQL</span>
-                                <span class="tech-tag">Apache Airflow</span>
-                                <span class="tech-tag">Docker</span>
-                                <span class="tech-tag">MongoDB</span>
-                            </div>
-                        </div>
-                    </div> -->
-                @endif
+                </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <!-- Achievements Section -->
     <section class="achievements-section">
         <div class="container">
             <div class="section-header">
-                <h2>Achievements & Certifications</h2>
-                <p>Recognition and certifications that validate my expertise</p>
+                <h4>Achievements & Certifications</h4>
+                <h5>Recognitions and qualifications that highlight my expertise.</h5>
             </div>
-            
             <div class="achievements-grid">
-                @if(isset($achievements) && $achievements->count() > 0)
-                    @foreach($achievements as $achievement)
-                    <div class="achievement-card">
-                        <div class="achievement-icon">
-                            @if($achievement->icon)
-                                <img src="{{ asset('storage/' . $achievement->icon) }}" alt="{{ $achievement->title }}">
-                            @else
-                                <div class="achievement-icon-default">🏆</div>
-                            @endif
-                        </div>
-                        <h3>{{ $achievement->title }}</h3>
-                        <p class="achievement-issuer">{{ $achievement->issuer }}</p>
-                        <p class="achievement-date">{{ $achievement->date }}</p>
-                        @if($achievement->description)
-                            <p class="achievement-description">{{ $achievement->description }}</p>
-                        @endif
-                    </div>
-                    @endforeach
-                @else
-                    <!-- Default Achievements if none in database
-                    <div class="achievement-card">
-                        <div class="achievement-icon">
-                            <div class="achievement-icon-default">🎓</div>
-                        </div>
-                        <h3>AWS Certified Solutions Architect</h3>
-                        <p class="achievement-issuer">Amazon Web Services</p>
-                        <p class="achievement-date">2023</p>
-                        <p class="achievement-description">Validated expertise in designing distributed systems on AWS</p>
-                    </div>
-                    <div class="achievement-card">
-                        <div class="achievement-icon">
-                            <div class="achievement-icon-default">🏆</div>
-                        </div>
-                        <h3>Best Data Pipeline Architecture</h3>
-                        <p class="achievement-issuer">Tech Innovation Awards</p>
-                        <p class="achievement-date">2022</p>
-                        <p class="achievement-description">Recognized for innovative approach to real-time data processing</p>
-                    </div>
-                    <div class="achievement-card">
-                        <div class="achievement-icon">
-                            <div class="achievement-icon-default">📜</div>
-                        </div>
-                        <h3>Google Cloud Professional Data Engineer</h3>
-                        <p class="achievement-issuer">Google Cloud</p>
-                        <p class="achievement-date">2021</p>
-                        <p class="achievement-description">Certified in designing and building data processing systems</p>
-                    </div> -->
-                @endif
-            </div>
-        </div>
-    </section>
-
-    <!-- Personal Info Section -->
-    <section class="personal-section">
-        <div class="container">
-            <div class="personal-content">
-                <div class="personal-text">
-                    <h2>Beyond the Code</h2>
-                    <p>
-                        When I'm not diving deep into data pipelines and optimizing databases, you can find me exploring new technologies, 
-                        contributing to open-source projects, or sharing knowledge through tech blogs and community meetups.
-                    </p>
-                    <p>
-                        I believe in continuous learning and staying updated with the latest trends in data engineering and cloud technologies. 
-                        My goal is to build systems that not only solve today's problems but are scalable for tomorrow's challenges.
-                    </p>
-                    
-                    <div class="personal-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">{{ $projectsCount ?? '50+' }}</span>
-                            <span class="stat-label">Projects Completed</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">{{ $experienceYears ?? '5+' }}</span>
-                            <span class="stat-label">Years Experience</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">{{ $clientsCount ?? '30+' }}</span>
-                            <span class="stat-label">Happy Clients</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="personal-image">
-                    <div class="image-wrapper">
-                        @if($profile && $profile->work_photo)
-                            <img src="{{ asset('storage/' . $profile->work_photo) }}" alt="{{ $profile->name }} at work">
+                @foreach($achievements as $index => $achievement)
+                <div class="achievement-card" data-aos="fade-up" data-aos-delay="{{ $index * 100 }}">
+                    <div class="achievement-icon">
+                        @if($achievement->icon)
+                            <img src="{{ asset('storage/' . $achievement->icon) }}" alt="{{ $achievement->title }}">
                         @else
-                            <img src="{{ asset('images/work-setup.jpg') }}" alt="Work setup">
+                            <i class="fas fa-trophy achievement-icon-default"></i>
                         @endif
                     </div>
+                    <h3>{{ $achievement->title }}</h3>
+                    <p class="achievement-issuer">{{ $achievement->issuer }}</p>
+                    <p class="achievement-date">{{ $achievement->date->format('M Y') }}</p>
+                    <p class="achievement-description">{{ $achievement->description }}</p>
                 </div>
+                @endforeach
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Let's Work Together</h2>
-                <p>Ready to transform your data into actionable insights? Let's discuss your project and create something amazing together.</p>
-                <div class="cta-buttons">
-                    <a href="{{ route('portfolio.contact') }}" class="btn-primary">Get In Touch</a>
-                    @if($profile && $profile->resume_url)
-                        <a href="{{ $profile->resume_url }}" target="_blank" class="btn-secondary">Download Resume</a>
+    <section class="personal-section">
+        <div class="personal-content">
+            <div class="personal-text">
+                <h2>A Glimpse into My World</h2>
+                <p>Beyond the code and data, I am a passionate individual who believes in continuous learning and creative exploration. My journey is driven by curiosity and a desire to make an impact, both professionally and personally.</p>
+                <p>In my spare time, I enjoy delving into new technologies, contributing to open-source projects, and exploring the intersection of data science and art. These hobbies not only enrich my life but also fuel my problem-solving skills and innovative thinking.</p>
+                <div class="personal-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">5+</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">10+</span>
+                        <span class="stat-label">Projects Completed</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3+</span>
+                        <span class="stat-label">Certifications</span>
+                    </div>
+                </div>
+            </div>
+            <div class="personal-image">
+                <div class="image-wrapper">
+                    @if($profile && $profile->photo)
+                        <img src="{{ asset('storage/' . $profile->photo) }}" alt="{{ $profile->name }}">
+                    @else
+                        <img src="{{ asset('images/foto-matin.png') }}" alt="matin rusydan">
                     @endif
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Ready to Transform Your Data?</h2>
+            <p>Let's collaborate on your next project and turn your data challenges into powerful solutions.</p>
+            <div class="cta-buttons">
+                <a href="{{ route('portfolio.contact') }}" class="btn-primary">Get In Touch</a>
+                <a href="{{ route('portfolio.index') }}#portfolio" class="btn-secondary">View My Work</a>
             </div>
         </div>
     </section>
@@ -321,7 +161,6 @@
 @section('scripts')
 <script src="{{ asset('js/script.js') }}"></script>
 <script>
-    // Add smooth scroll animation for experience timeline
     document.addEventListener('DOMContentLoaded', function() {
         const observerOptions = {
             threshold: 0.1,
@@ -356,6 +195,15 @@
         }, observerOptions);
 
         skillBars.forEach(bar => skillObserver.observe(bar));
+
+        // Trigger animation for the hero image on About page
+        const heroImageAnimated = document.querySelector('.hero-image.animated-left-on-load');
+        if (heroImageAnimated) {
+            // Memberi sedikit jeda agar browser sempat merender state awal
+            setTimeout(() => {
+                heroImageAnimated.classList.add('is-visible');
+            }, 100);
+        }
     });
 </script>
 @endsection
